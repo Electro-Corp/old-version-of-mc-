@@ -103,12 +103,12 @@
 /*     */     
 /* 104 */     Mouse.setGrabbed(true);
 /*     */     
-/* 106 */     for (int i = 0; i < 10; i++) {
-/*     */       
-/* 108 */       Zombie zombie = new Zombie(this.level, 128.0F, 0.0F, 128.0F);
-/* 109 */       zombie.resetPos();
-/* 110 */       this.zombies.add(zombie);
-/*     */     } 
+///* 106 */     for (int i = 0; i < 10; i++) {
+///*     */       
+///* 108 */       Zombie zombie = new Zombie(this.level, 128.0F, 0.0F, 128.0F);
+///* 109 */       zombie.resetPos();
+///* 110 */       this.zombies.add(zombie);
+///*     */     } 
 /*     */   }
 /*     */ 
 /*     */   
@@ -184,7 +184,7 @@
 /* 184 */         if (Keyboard.getEventKey() == 7) this.paintTexture = 6; 
 /* 185 */         if (Keyboard.getEventKey() == 34)
 /*     */         {
-/* 187 */           this.zombies.add(new Zombie(this.level, this.player.x, this.player.y, this.player.z));
+/* 187 */           this.zombies.add(new Zombie(this.level, this.player.x, this.player.y, this.player.z,this.player));
 /*     */         }
 /*     */       } 
 /*     */     } 
@@ -209,9 +209,10 @@
 /*     */ 
 /*     */   
 /*     */   private void moveCameraToPlayer(float a) {
-			//System.out.printf("X ROT: "+ this.player.xRot + "Y ROT: ", this.player.yRot+"\n");
-			GL11.glRotatef(this.player.camrot, 0.0F, 0.0F, 1.0F);
-			GL11.glRotatef(this.player.camrotY, 1.0F, 0.0F, 0.0F);
+			  // Source engine like camera movement
+			  GL11.glRotatef(this.player.camrot, 0.0F, 0.0F, 1.0F);
+			  GL11.glRotatef(this.player.camrotY, 1.0F, 0.0F, 0.0F);
+			  
 /* 212 */     GL11.glTranslatef(0.0F, 0.0F, -0.3F);
 /* 213 */     GL11.glRotatef(this.player.xRot, 1.0F, 0.0F, 0.0F);
 /* 214 */     GL11.glRotatef(this.player.yRot, 0.0F, 1.0F, 0.0F);
@@ -417,6 +418,7 @@
 /* 413 */     GL11.glBindTexture(3553, id);
 /* 414 */     GL11.glEnable(3553);
 /* 415 */     t.init();
+			  
 /* 416 */     Tile.tiles[this.paintTexture].render(t, this.level, 0, -2, 0, 0);
 /* 417 */     t.flush();
 /* 418 */     GL11.glDisable(3553);

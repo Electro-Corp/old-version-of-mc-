@@ -1,6 +1,7 @@
 /*    */ package com.mojang.minecraft.character;
 /*    */ 
 /*    */ import com.mojang.minecraft.Entity;
+import com.mojang.minecraft.Player;
 /*    */ import com.mojang.minecraft.Textures;
 /*    */ import com.mojang.minecraft.level.Level;
 /*    */ import org.lwjgl.opengl.GL11;
@@ -12,15 +13,16 @@
 /*    */   public float speed;
 /*    */   public float rotA;
 /* 14 */   private static ZombieModel zombieModel = new ZombieModel();
-/*    */ 
+/*    */   public Player e;
 /*    */   
-/*    */   public Zombie(Level level, float x, float y, float z) {
+/*    */   public Zombie(Level level, float x, float y, float z, Player player) {
 /* 18 */     super(level);
 /* 19 */     this.rotA = (float)(Math.random() + 1.0D) * 0.01F;
 /* 20 */     setPos(x, y, z);
 /* 21 */     this.timeOffs = (float)Math.random() * 1239813.0F;
 /* 22 */     this.rot = (float)(Math.random() * Math.PI * 2.0D);
 /* 23 */     this.speed = 1.0F;
+			 e = player;
 /*    */   }
 /*    */ 
 /*    */   
@@ -33,16 +35,22 @@
 /*    */     
 /* 34 */     if (this.y < -100.0F) remove();
 /*    */     
-/* 36 */     this.rot += this.rotA;
-/* 37 */     this.rotA = (float)(this.rotA * 0.99D);
-/* 38 */     this.rotA = (float)(this.rotA + (Math.random() - Math.random()) * Math.random() * Math.random() * 0.07999999821186066D);
+/* 36 */     this.rot = this.rotA;
+/* 37 */     //this.rotA = (float)(this.rotA * 0.99D);
+			 this.rotA = (float)Math.toDegrees(Math.atan((this.e.xo - this.xo) / (this.yo - this.e.yo)));
+/* 38 */     System.out.printf("Player X Y:( "+ this.e.xo + ","+this.e.yo+"), rotA = "+ this.rotA+ " Rot: " + rot +"\n");
+			 
+			 //this.rotA = (float)(Math.sqrt(Math.pow(this.e.xRot,2)+Math.pow(this.e.yRot,2)) * -1);// ya) * -1);//+ (Math.random() - Math.random()) * Math.random() * Math.random() * 0.07999999821186066D);
 /* 39 */     xa = (float)Math.sin(this.rot);
 /* 40 */     ya = (float)Math.cos(this.rot);
 /*    */     
-/* 42 */     if (this.onGround && Math.random() < 0.08D)
-/*    */     {
-/* 44 */       this.yd = 0.5F;
-/*    */     }
+
+//			 xa = Math.cos(rot);
+//			 ya = rot;
+///* 42 */     if (this.onGround && Math.random() < 0.08D)
+///*    */     {
+///* 44 */       this.yd = 0.5F;
+///*    */     }
 /*    */     
 /* 47 */     moveRelative(xa, ya, this.onGround ? 0.1F : 0.02F);
 /*    */     

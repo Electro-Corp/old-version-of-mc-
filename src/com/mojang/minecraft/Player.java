@@ -13,7 +13,7 @@
 /*    */   }
 /*    */   public float camrot = 0;
 		   private float val = 1F;
-		   private float yMax = 8.0F;
+		   private float yMax = 16.0F;
 		   private float xMax = 5.0F;
 /*    */   public float camrotY = 0;
 		   //private boolean isReturning;
@@ -31,15 +31,16 @@
 /* 27 */     if (Keyboard.isKeyDown(200) || Keyboard.isKeyDown(17)) { 
 				ya-= 10; 
 				if(camrotY < yMax) {
-				camrotY+=val;
+				camrotY+=val * 2;
 				}
 			}
 /* 28 */      else if (Keyboard.isKeyDown(208) || Keyboard.isKeyDown(31)) {
 	ya+= 10;
 	if(camrotY > yMax * -1) {
-	camrotY -= val;
+	camrotY -= val * 2;
 	}
 }else {
+	
 	if(camrotY < 0F) {
 		camrotY += val;
 	}else if(camrotY > 0F) {
@@ -55,24 +56,27 @@
 	}
 }
 /* 30 */      else if (Keyboard.isKeyDown(205) || Keyboard.isKeyDown(32)) {
-	xa+= 10; 
-	if(camrot > xMax * -1) {
-	camrot-=val;
-	}
-}else {
-	if(camrot < 0F) {
-		camrot += val;
-	}else if(camrot > 0F) {
-		camrot -= val;
-	}else {
-	camrot = 0F;
-	}
-}
+					xa+= 10; 
+					if(camrot > xMax * -1) {
+					camrot-=val;
+					}
+				}else {
+					if(camrot < 0F) {
+						camrot += val;
+					}else if(camrot > 0F) {
+						camrot -= val;
+					}else {
+					camrot = 0F;
+					}
+				}
 /* 31 */      if (Keyboard.isKeyDown(57) || Keyboard.isKeyDown(219))
 /*    */     {
 /* 33 */       if (this.onGround)
 /*    */       {
 /* 35 */         this.yd = 0.5F;
+				if(camrotY < yMax) {
+					camrotY+=val * 2;
+					}
 /*    */       }
 /*    */     }
 /*    */    
@@ -86,8 +90,8 @@
 /*    */     
 /* 47 */     if (this.onGround) {
 /*    */       
-/* 49 */       this.xd *= 0.7F;
-/* 50 */       this.zd *= 0.7F;
+/* 49 */       this.xd *= 0.9F;
+/* 50 */       this.zd *= 0.9F;
 /*    */     } 
 /*    */   }
 /*    */ }
