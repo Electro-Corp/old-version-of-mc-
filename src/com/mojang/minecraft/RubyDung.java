@@ -74,7 +74,7 @@
 /*     */ 
 /*     */     
 /*  76 */     Display.setDisplayMode(new DisplayMode(1024, 720));
-/*     */     
+/*     */     Display.setTitle("Minecraft RD - Heavily Modified Edition");
 /*  78 */     Display.create();
 /*  79 */     Keyboard.create();
 /*  80 */     Mouse.create();
@@ -228,9 +228,14 @@
 /*     */   private void setupCamera(float a) {
 /* 224 */     GL11.glMatrixMode(5889);
 /* 225 */     GL11.glLoadIdentity();
-/* 226 */     GLU.gluPerspective(70.0F, this.width / this.height, 0.05F, 1000.0F);
+			  if(this.player.speed == 1.0F) {
+/* 226 */     	GLU.gluPerspective(70.0F, this.width / this.height, 0.05F, 1000.0F);
+			  }else {
+				  GLU.gluPerspective(70.0F * this.player.speed, this.width /this.height, 0.05F, 1000.0F);
+			  }
 /* 227 */     GL11.glMatrixMode(5888);
 /* 228 */     GL11.glLoadIdentity();
+	 		  
 /* 229 */     moveCameraToPlayer(a);
 /*     */   }
 /*     */   
@@ -420,7 +425,9 @@
 /* 415 */     t.init();
 			  
 /* 416 */     Tile.tiles[this.paintTexture].render(t, this.level, 0, -2, 0, 0);
-/* 417 */     t.flush();
+/* 417 */     // draw sprint bar
+			   Tile.tiles[this.paintTexture].render(t, this.level, 0, -2, -1*(int)this.player.stamina/10, 0);
+			  t.flush();
 /* 418 */     GL11.glDisable(3553);
 /* 419 */     GL11.glPopMatrix();
 /*     */     
@@ -438,6 +445,10 @@
 /* 432 */     t.vertex((wc - 4), (hc + 1), 0.0F);
 /* 433 */     t.vertex((wc + 5), (hc + 1), 0.0F);
 /* 434 */     t.flush();
+
+
+			  
+              
 /*     */   }
 /*     */   
 /* 437 */   FloatBuffer lb = BufferUtils.createFloatBuffer(16);

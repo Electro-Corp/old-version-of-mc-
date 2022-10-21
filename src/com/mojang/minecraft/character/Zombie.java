@@ -37,8 +37,24 @@ import com.mojang.minecraft.Player;
 /*    */     
 /* 36 */     this.rot = this.rotA;
 /* 37 */     //this.rotA = (float)(this.rotA * 0.99D);
-			 this.rotA = (float)Math.toDegrees(Math.atan((this.e.xo - this.xo) / (this.yo - this.e.yo)));
-/* 38 */     System.out.printf("Player X Y:( "+ this.e.xo + ","+this.e.yo+"), rotA = "+ this.rotA+ " Rot: " + rot +"\n");
+			 if(this.e.xo > this.xo) {
+				 if(this.y > this.e.yo)
+					 this.rotA = (float) ((float)Math.toDegrees(Math.atan((this.e.xo - this.xo) / (this.yo - this.e.yo))));
+/* 38 */     	else{
+	 this.rotA = (float) ((float)Math.toDegrees(Math.atan((this.e.xo - this.xo) / (this.e.yo - this.yo))));
+
+}
+				 }
+			 else {
+				 if(this.y > this.e.yo)
+					 this.rotA = (float) ((float)Math.toDegrees(Math.atan((this.xo - this.e.xo) / (this.yo - this.e.yo))));
+/* 38 */     	else{
+	 this.rotA = (float) ((float)Math.toDegrees(Math.atan((this.xo - this.e.xo) / (this.e.yo - this.yo))));
+
+}
+
+}
+			 System.out.printf("Player X Y:( "+ this.e.xo + ","+this.e.yo+"), rotA = "+ this.rotA+ " Rot: " + rot +"\n");
 			 
 			 //this.rotA = (float)(Math.sqrt(Math.pow(this.e.xRot,2)+Math.pow(this.e.yRot,2)) * -1);// ya) * -1);//+ (Math.random() - Math.random()) * Math.random() * Math.random() * 0.07999999821186066D);
 /* 39 */     xa = (float)Math.sin(this.rot);

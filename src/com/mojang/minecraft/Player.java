@@ -16,6 +16,10 @@
 		   private float yMax = 16.0F;
 		   private float xMax = 5.0F;
 /*    */   public float camrotY = 0;
+		   public float speed = 1.0F;
+		   private float maxSpeed = 1.3F;
+		   private float speedVal = 0.1F;
+		   public float stamina = 100F;
 		   //private boolean isReturning;
 /*    */   public void tick() {
 /* 17 */     this.xo = this.x;
@@ -79,6 +83,29 @@
 					}
 /*    */       }
 /*    */     }
+             if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+            	 if(stamina > 0) {
+            		 stamina -= 1;
+                	 System.out.println("Stamina: "+stamina);
+            	 }else if(stamina <= 5) {
+            		 speed = 1F;
+            	 }
+            	 if(speed < maxSpeed ) {
+            		 speed += speedVal;
+            	
+            	 }
+             }else {
+            	 if(stamina < 100) {
+            		 stamina += 0.5;
+            	 }
+            	 if(speed > 1F) {
+            		 speed -= speedVal;
+            	 }else {
+            		 if(speed < 1F) {
+            			 speed = 1F;
+            		 }
+            	 }
+             }
 /*    */    
 /* 39 */     moveRelative(xa, ya, this.onGround ? 0.1F : 0.02F);
 /*    */     
@@ -90,8 +117,8 @@
 /*    */     
 /* 47 */     if (this.onGround) {
 /*    */       
-/* 49 */       this.xd *= 0.9F;
-/* 50 */       this.zd *= 0.9F;
+/* 49 */       this.xd *= 0.9F * speed;
+/* 50 */       this.zd *= 0.9F * speed;
 /*    */     } 
 /*    */   }
 /*    */ }
