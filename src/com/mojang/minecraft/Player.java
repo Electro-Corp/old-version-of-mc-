@@ -2,7 +2,7 @@
 /*    */ 
 /*    */ import com.mojang.minecraft.level.Level;
 /*    */ import org.lwjgl.input.Keyboard;
-/*    */ 
+/*    */ import java.util.Random;
 /*    */ 
 /*    */ public class Player
 /*    */   extends Entity
@@ -11,6 +11,7 @@
 /* 11 */     super(level);
 /* 12 */     this.heightOffset = 1.62F;
 /*    */   }
+		   Random rand = new Random();
 /*    */   public float camrot = 0;
 		   private float val = 1F;
 		   private float yMax = 16.0F;
@@ -20,6 +21,7 @@
 		   private float maxSpeed = 1.3F;
 		   private float speedVal = 0.1F;
 		   public float stamina = 100F;
+		   private float prevX, prevY, prevZ;
 		   //private boolean isReturning;
 /*    */   public void tick() {
 /* 17 */     this.xo = this.x;
@@ -106,7 +108,13 @@
             		 }
             	 }
              }
-/*    */    
+///*    */     if(Keyboard.isKeyDown(17)) {
+//	            //System.out.println("Oh hey x:"+x+" Y: "+y);
+//				if((Math.abs(x - prevX) < 0.001) && (Math.abs(y - prevY) < 0.01)){//&& rand.nextFloat() > 0.8) {
+//					this.yd = 0.5F;
+//				}
+//			 }
+             
 /* 39 */     moveRelative(xa, ya, this.onGround ? 0.1F : 0.02F);
 /*    */     
 /* 41 */     this.yd = (float)(this.yd - 0.08D);
@@ -115,11 +123,16 @@
 /* 44 */     this.yd *= 0.98F;
 /* 45 */     this.zd *= 0.91F;
 /*    */     
-/* 47 */     if (this.onGround) {
+/* 47 */     //if (this.onGround) {
 /*    */       
 /* 49 */       this.xd *= 0.9F * speed;
 /* 50 */       this.zd *= 0.9F * speed;
-/*    */     } 
+/*    */     //} 
+            if(rand.nextFloat() > 0.8) {
+				prevX = x;
+				prevY = y;
+				prevZ = z;
+            }
 /*    */   }
 /*    */ }
 

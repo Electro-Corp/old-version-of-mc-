@@ -37,44 +37,30 @@ import com.mojang.minecraft.Player;
 /*    */     
 /* 36 */     this.rot = this.rotA;
 /* 37 */     //this.rotA = (float)(this.rotA * 0.99D);
-			 if(this.e.xo > this.xo) {
-				 if(this.y > this.e.yo)
-					 this.rotA = (float) ((float)Math.toDegrees(Math.atan((this.e.xo - this.xo) / (this.yo - this.e.yo))));
-/* 38 */     	else{
-	 this.rotA = (float) ((float)Math.toDegrees(Math.atan((this.e.xo - this.xo) / (this.e.yo - this.yo))));
-
-}
-				 }
-			 else {
-				 if(this.y > this.e.yo)
-					 this.rotA = (float) ((float)Math.toDegrees(Math.atan((this.xo - this.e.xo) / (this.yo - this.e.yo))));
-/* 38 */     	else{
-	 this.rotA = (float) ((float)Math.toDegrees(Math.atan((this.xo - this.e.xo) / (this.e.yo - this.yo))));
-
-}
-
-}
-			 System.out.printf("Player X Y:( "+ this.e.xo + ","+this.e.yo+"), rotA = "+ this.rotA+ " Rot: " + rot +"\n");
+			 
+			 this.rotA = (float) ((int)Math.toDegrees(Math.atan(Math.abs((this.e.xo - this.xo) / (this.zo - this.e.zo)))));
+/* 38 */     	
+			 System.out.printf("Player X Z:( "+ this.e.xo + ","+this.e.zo+"), rotA = "+ this.rotA+ " Rot: " + rot +"\n");
 			 
 			 //this.rotA = (float)(Math.sqrt(Math.pow(this.e.xRot,2)+Math.pow(this.e.yRot,2)) * -1);// ya) * -1);//+ (Math.random() - Math.random()) * Math.random() * Math.random() * 0.07999999821186066D);
-/* 39 */     xa = (float)Math.sin(this.rot);
-/* 40 */     ya = (float)Math.cos(this.rot);
+/* 39 */     xa = (float)Math.sin(this.rotA);
+/* 40 */     ya = (float)Math.cos(this.rotA);
 /*    */     
 
 //			 xa = Math.cos(rot);
 //			 ya = rot;
-///* 42 */     if (this.onGround && Math.random() < 0.08D)
-///*    */     {
-///* 44 */       this.yd = 0.5F;
-///*    */     }
+/* 42 */     if (this.onGround && Math.random() < 0.08D)
+/*    */     {
+/* 44 */       this.yd = 0.5F;
+/*    */     }
 /*    */     
 /* 47 */     moveRelative(xa, ya, this.onGround ? 0.1F : 0.02F);
 /*    */     
 /* 49 */     this.yd = (float)(this.yd - 0.08D);
 /* 50 */     move(this.xd, this.yd, this.zd);
-/* 51 */     this.xd *= 0.91F;
-/* 52 */     this.yd *= 0.98F;
-/* 53 */     this.zd *= 0.91F;
+/* 51 */     this.xd *= 0.9F;
+/* 52 */     //this.yd *= 1.21F;
+/* 53 */     this.zd *= 0.9F;
 /*    */     
 /* 55 */     if (this.onGround) {
 /*    */       

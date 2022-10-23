@@ -73,7 +73,7 @@
 /*     */ 
 /*     */ 
 /*     */     
-/*  76 */     Display.setDisplayMode(new DisplayMode(1024, 720));
+/*  76 */     Display.setDisplayMode(new DisplayMode(480, 360));
 /*     */     Display.setTitle("Minecraft RD - Heavily Modified Edition");
 /*  78 */     Display.create();
 /*  79 */     Keyboard.create();
@@ -103,12 +103,12 @@
 /*     */     
 /* 104 */     Mouse.setGrabbed(true);
 /*     */     
-///* 106 */     for (int i = 0; i < 10; i++) {
-///*     */       
-///* 108 */       Zombie zombie = new Zombie(this.level, 128.0F, 0.0F, 128.0F);
-///* 109 */       zombie.resetPos();
-///* 110 */       this.zombies.add(zombie);
-///*     */     } 
+/* 106 */     for (int i = 0; i < 1000; i++) {
+/*     */       
+/* 108 */       Zombie zombie = new Zombie(this.level, 128.0F, 0.0F, 128.0F,this.player);
+/* 109 */       zombie.resetPos();
+/* 110 */       this.zombies.add(zombie);
+/*     */     } 
 /*     */   }
 /*     */ 
 /*     */   
@@ -228,10 +228,11 @@
 /*     */   private void setupCamera(float a) {
 /* 224 */     GL11.glMatrixMode(5889);
 /* 225 */     GL11.glLoadIdentity();
-			  if(this.player.speed == 1.0F) {
+		      // is player sprinting
+			  if(this.player.speed == 1.0F && this.player.stamina > 0) {
 /* 226 */     	GLU.gluPerspective(70.0F, this.width / this.height, 0.05F, 1000.0F);
 			  }else {
-				  GLU.gluPerspective(70.0F * this.player.speed, this.width /this.height, 0.05F, 1000.0F);
+				GLU.gluPerspective(70.0F * this.player.speed, this.width /this.height, 0.05F, 1000.0F);
 			  }
 /* 227 */     GL11.glMatrixMode(5888);
 /* 228 */     GL11.glLoadIdentity();
@@ -425,7 +426,7 @@
 /* 415 */     t.init();
 			  
 /* 416 */     Tile.tiles[this.paintTexture].render(t, this.level, 0, -2, 0, 0);
-/* 417 */     // draw sprint bar
+/* 417 */     // draw sprint "bar"
 			   Tile.tiles[this.paintTexture].render(t, this.level, 0, -2, -1*(int)this.player.stamina/10, 0);
 			  t.flush();
 /* 418 */     GL11.glDisable(3553);

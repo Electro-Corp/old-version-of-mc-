@@ -20,13 +20,13 @@
 /*     */   public boolean removed = false;
 /*  21 */   protected float bbWidth = 0.6F;
 /*  22 */   protected float bbHeight = 1.8F;
-/*     */ 
+/*     */   public Player p;
 /*     */   
 /*     */   public Entity(Level level) {
 /*  26 */     this.level = level;
 /*  27 */     resetPos();
 /*     */   }
-/*     */ 
+/*     */   
 /*     */   
 /*     */   protected void resetPos() {
 /*  32 */     float x = (float)Math.random() * this.level.width;
@@ -81,14 +81,20 @@
 /*     */     int i;
 /*  82 */     for (i = 0; i < aABBs.size(); i++)
 /*  83 */       ya = ((AABB)aABBs.get(i)).clipYCollide(this.bb, ya); 
-/*  84 */     this.bb.move(0.0F, ya, 0.0F);
+ 				//System.out.println("Y: "+ya);
+/*  84 */     
 /*     */     
 /*  86 */     for (i = 0; i < aABBs.size(); i++)
 /*  87 */       xa = ((AABB)aABBs.get(i)).clipXCollide(this.bb, xa); 
 /*  88 */     this.bb.move(xa, 0.0F, 0.0F);
 /*     */     
 /*  90 */     for (i = 0; i < aABBs.size(); i++)
-/*  91 */       za = ((AABB)aABBs.get(i)).clipZCollide(this.bb, za); 
+/*  91 */       za = ((AABB)aABBs.get(i)).clipZCollide(this.bb, za);
+			    if(za < 0.1 && ya == 0.0) {
+			    	ya *= 0.5;
+			    }
+			    //System.out.println("Z; "+ za);	
+			  this.bb.move(0.0F, ya, 0.0F);
 /*  92 */     this.bb.move(0.0F, 0.0F, za);
 /*     */     
 /*  94 */     this.onGround = (yaOrg != ya && yaOrg < 0.0F);
